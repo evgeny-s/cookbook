@@ -4,17 +4,10 @@ import {DishItem} from "./DishItem";
 import * as React from "react";
 import {useSelectDish} from "./use-select-dish";
 import {useEffect} from "react";
+import {IngredientList} from "./IngredientList";
 
 export function CookBook() {
     const {selectedDishes, ingredients, onDishToggle} = useSelectDish(config.dishes);
-
-    useEffect(() => {
-        console.log(ingredients);
-    }, [ingredients]);
-
-    useEffect(() => {
-        console.log(selectedDishes);
-    }, [selectedDishes]);
 
     const itemChanged = (index: number, event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
         onDishToggle(index);
@@ -22,7 +15,7 @@ export function CookBook() {
 
     return (
         <Box>
-            <Typography variant={"h3"}>Cook Book</Typography>
+            <Typography variant={"h3"} textAlign="center">Cook Book</Typography>
             <Box flexDirection="column" alignItems="center" display="flex">
                 {
                     config.dishes.map(({title, picture, ingredients}, i) => (
@@ -32,15 +25,7 @@ export function CookBook() {
                 }
 
             </Box>
-            <Box>
-                <TextField
-                    style={{width: '100%'}}
-                    placeholder="Ingredients"
-                    multiline
-                    variant="standard"
-                    value={ingredients.map(({title, unit, amount}: Ingredient) => `${title} - ${amount}${unit}`)}
-                />
-            </Box>
+            <IngredientList ingredients={ingredients}/>
         </Box>
 
     );

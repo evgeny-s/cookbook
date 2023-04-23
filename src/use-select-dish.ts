@@ -42,8 +42,6 @@ export const useSelectDish = (allDishes: Dish[]): UseSelectDishInterface => {
                 newIngredients.push({title, unit, amount});
             }
 
-            console.log('newIngredients', newIngredients);
-
             return newIngredients;
         };
 
