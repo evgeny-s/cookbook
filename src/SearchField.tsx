@@ -16,7 +16,7 @@ export const SearchField = ({searchString, onChange}: SearchFieldProps) => {
         <Box display="flex" justifyContent="center">
             <Paper
                 component="form"
-                sx={{margin: '8px', display: 'flex', alignItems: 'center', width: '100%', maxWidth: 350, minWidth: 350}}
+                sx={{margin: '8px', display: 'flex', alignItems: 'center', width: '350px'}}
             >
                 <InputBase
                     sx={{ml: 1, flex: 1}}

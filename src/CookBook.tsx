@@ -1,10 +1,10 @@
 import {Box, Typography} from "@mui/material";
-import {config} from "./config";
 import {DishItem} from "./DishItem";
 import * as React from "react";
 import {useSelectDish} from "./use-select-dish";
 import {IngredientList} from "./IngredientList";
 import {SearchField} from "./SearchField";
+import emptyImage from './assets/empty.png';
 
 export function CookBook() {
     const {selectedDishes, ingredients, onDishToggle, dishes, searchString, onSearchChange} = useSelectDish();
@@ -16,7 +16,7 @@ export function CookBook() {
     return (
         <Box>
             <Typography variant={"h3"} textAlign="center">Cook Book</Typography>
-            <SearchField searchString={searchString} onChange={onSearchChange} />
+            <SearchField searchString={searchString} onChange={onSearchChange}/>
             <Box flexDirection="column" alignItems="center" display="flex">
                 {
                     dishes.map(({title, picture, ingredients}, i) => (
@@ -25,7 +25,15 @@ export function CookBook() {
                                   isChecked={selectedDishes.includes(dishes[i].id) || false}/>
                     ))
                 }
+                {
+                    !dishes.length && (
+                        <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center">
+                            <img src={emptyImage} alt="empty" style={{maxWidth: '300px'}}/>
+                            <Typography>No entries...</Typography>
+                        </Box>
 
+                    )
+                }
             </Box>
             <IngredientList ingredients={ingredients}/>
         </Box>

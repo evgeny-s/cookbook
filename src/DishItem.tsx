@@ -12,7 +12,7 @@ type DishProps = {
 
 export const DishItem = ({title, picture, ingredients, onChange, isChecked}: DishProps) => {
     return (
-        <Card sx={{maxWidth: 500, minWidth: 350, margin: '5px 5px 20px 5px'}}>
+        <Card sx={{width: 350, margin: '5px 5px 20px 5px'}}>
             <CardMedia
                 component="img"
                 alt="green iguana"
