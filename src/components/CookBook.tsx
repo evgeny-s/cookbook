@@ -1,10 +1,10 @@
 import {Box, Typography} from "@mui/material";
 import {DishItem} from "./DishItem";
 import * as React from "react";
-import {useSelectDish} from "./use-select-dish";
+import {useSelectDish} from "../hooks/use-select-dish";
 import {IngredientList} from "./IngredientList";
 import {SearchField} from "./SearchField";
-import emptyImage from './assets/empty.png';
+import emptyImage from '../assets/empty.png';
 
 export function CookBook() {
     const {selectedDishes, ingredients, onDishToggle, dishes, searchString, onSearchChange} = useSelectDish();

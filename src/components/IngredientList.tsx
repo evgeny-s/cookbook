@@ -2,7 +2,7 @@ import {Box, Card, CardContent, Fab, IconButton, Paper, TextField, Typography} f
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Zoom from "@mui/material/Zoom";
 import * as React from "react";
-import {Ingredient} from "./config";
+import {Ingredient} from "../config/config";
 import {useEffect, useState} from "react";
 import {ContentCopy} from "@mui/icons-material";
 import copy from 'copy-to-clipboard';

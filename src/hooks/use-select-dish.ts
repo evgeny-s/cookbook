@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {config, Dish, Ingredient} from "./config";
+import {config, Dish, Ingredient} from "../config/config";
 
 interface UseSelectDishInterface {
     ingredients: Ingredient[];

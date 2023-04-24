@@ -1,5 +1,5 @@
 import React from 'react';
-import {CookBook} from "./CookBook";
+import {CookBook} from "./components/CookBook";
 
 function App() {
     return (

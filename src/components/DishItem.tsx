@@ -1,5 +1,5 @@
 import {Card, CardActions, CardContent, CardMedia, Checkbox, Typography} from "@mui/material";
-import {Ingredient} from './config'
+import {Ingredient} from '../config/config'
 import * as React from "react";
 
 type DishProps = {
