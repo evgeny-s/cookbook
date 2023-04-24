@@ -1,8 +1,11 @@
 import {Card, CardActions, CardContent, CardMedia, Checkbox, Typography} from "@mui/material";
-import {Dish} from './config'
+import {Ingredient} from './config'
 import * as React from "react";
 
-type DishProps = Dish & {
+type DishProps = {
+    title: string;
+    picture: string;
+    ingredients: Ingredient[],
     onChange: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void,
     isChecked: boolean,
 }

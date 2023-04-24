@@ -1,16 +1,15 @@
-import {Box, TextField, Typography} from "@mui/material";
-import {config, Ingredient} from "./config";
+import {Box, Typography} from "@mui/material";
+import {config} from "./config";
 import {DishItem} from "./DishItem";
 import * as React from "react";
 import {useSelectDish} from "./use-select-dish";
-import {useEffect} from "react";
 import {IngredientList} from "./IngredientList";
 
 export function CookBook() {
-    const {selectedDishes, ingredients, onDishToggle} = useSelectDish(config.dishes);
+    const {selectedDishes, ingredients, onDishToggle, dishes} = useSelectDish();
 
-    const itemChanged = (index: number, event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
-        onDishToggle(index);
+    const itemChanged = (index: number) => {
+        onDishToggle(dishes[index].id);
     };
 
     return (
@@ -18,9 +17,10 @@ export function CookBook() {
             <Typography variant={"h3"} textAlign="center">Cook Book</Typography>
             <Box flexDirection="column" alignItems="center" display="flex">
                 {
-                    config.dishes.map(({title, picture, ingredients}, i) => (
+                    dishes.map(({title, picture, ingredients}, i) => (
                         <DishItem title={title} picture={picture} ingredients={ingredients} key={i}
-                                  onChange={itemChanged.bind(null, i)} isChecked={selectedDishes[i] || false}/>
+                                  onChange={itemChanged.bind(null, i)}
+                                  isChecked={selectedDishes.includes(dishes[i].id) || false}/>
                     ))
                 }
 

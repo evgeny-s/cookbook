@@ -1,3 +1,5 @@
+import {v4 as uuid} from "uuid";
+
 export type Ingredient = {
     title: string;
     amount: number;
@@ -5,6 +7,7 @@ export type Ingredient = {
 };
 
 export type Dish = {
+    id: string;
     title: string;
     picture: string;
     ingredients: Ingredient[];
@@ -16,6 +19,7 @@ export type Config = {
 
 export const config: Config = {
     dishes: [{
+        id: uuid(),
         title: 'Борщ',
         picture: 'https://img.delo-vcusa.ru/2020/11/Borshh-s-yablokami.jpg',
         ingredients: [
@@ -31,6 +35,7 @@ export const config: Config = {
             {title: 'Специи', amount: 1, unit: 'шт'},
         ]
     }, {
+        id: uuid(),
         title: 'Куриный суп',
         picture: 'https://gotovim-doma.ru/images/recipe/e/d7/ed7f7fb19e9fba185ed5ccbe4ffb39ef_l.jpg',
         ingredients: [
@@ -43,6 +48,7 @@ export const config: Config = {
             {title: 'Специи', amount: 1, unit: 'шт'},
         ]
     }, {
+        id: uuid(),
         title: 'Грибной суп',
         picture: 'https://static.1000.menu/img/content-v2/78/2a/18882/legkii-gribnoi-sup-s-vermishelu_1603697003_15_max.jpg',
         ingredients: [
@@ -55,6 +61,7 @@ export const config: Config = {
             {title: 'Зелень (укроп, лук, зелень)', amount: 1, unit: 'шт'},
         ]
     }, {
+        id: uuid(),
         title: 'Гороховый суп',
         picture: 'https://buljon.ru/files/styles/recipe_large/public/images/recipes/2021-10/AWw65ylRRUgl5RnAy1YTs87JG91G27nip1wU1ZiQVMI.jpg',
         ingredients: [
@@ -67,6 +74,7 @@ export const config: Config = {
             {title: 'Специи', amount: 1, unit: 'шт'},
         ]
     }, {
+        id: uuid(),
         title: 'Суп-пюре из грибов шампиньонов и брокколи',
         picture: 'https://www.ogorod.ru/images/cache/1200x750/crop/images%7Ccms-image-000108436.jpg',
         ingredients: [
@@ -80,6 +88,7 @@ export const config: Config = {
             {title: 'Плавленый сыр', amount: 1, unit: 'упаковка'},
         ]
     }, {
+        id: uuid(),
         title: 'Окрошка',
         picture: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/%D0%9E%D0%BA%D1%80%D0%BE%D1%88%D0%BA%D0%B0_Okroshka_05.jpg/800px-%D0%9E%D0%BA%D1%80%D0%BE%D1%88%D0%BA%D0%B0_Okroshka_05.jpg',
         ingredients: [
@@ -93,6 +102,7 @@ export const config: Config = {
             {title: 'Редис', amount: 1, unit: 'шт'},
         ]
     }, {
+        id: uuid(),
         title: 'Гречневый суп',
         picture: 'https://ist.say7.info/img0004/12/412_0167lys_3419_1024.jpg',
         ingredients: [
@@ -105,6 +115,7 @@ export const config: Config = {
             {title: 'Кости на суп (свинина или индейка)', amount: 1, unit: 'упаковка'},
         ]
     }, {
+        id: uuid(),
         title: 'Рисовый суп',
         picture: 'https://www.maggi.ru/data/images/recept/img640x500/recept_1678_tahp.jpg',
         ingredients: [
@@ -117,6 +128,7 @@ export const config: Config = {
             {title: 'Кости на суп (свинина или индейка)', amount: 1, unit: 'упаковка'},
         ]
     }, {
+        id: uuid(),
         title: 'Зеленый борщ',
         picture: 'https://2recepta.com/recept/zelenyj-borshh-so-shhavelem-i-yajcom/zelenyj-borshh-so-shhavelem-i-yajcom.jpg',
         ingredients: [
@@ -132,6 +144,7 @@ export const config: Config = {
             {title: 'Кости на суп (свинина или индейка)', amount: 1, unit: 'упаковка'},
         ]
     }, {
+        id: uuid(),
         title: 'Суп с фрикадельками',
         picture: 'https://art-lunch.ru/wp-content/uploads/2017/12/Soup_with_meatballs_001.jpg',
         ingredients: [
@@ -144,6 +157,7 @@ export const config: Config = {
             {title: 'Кости на суп (свинина или индейка или курица)', amount: 1, unit: 'упаковка'},
         ]
     }, {
+        id: uuid(),
         title: 'Капустняк',
         picture: 'https://rutxt.ru/files/3283/original/3f3ae06384.JPG',
         ingredients: [
@@ -157,6 +171,7 @@ export const config: Config = {
             {title: 'Томат (паста)', amount: 1, unit: 'банка'},
         ]
     }, {
+        id: uuid(),
         title: 'Солянка',
         picture: 'https://cdn.lifehacker.ru/wp-content/uploads/2020/06/6_1592925463-scaled-e1592925524667.jpg',
         ingredients: [
@@ -174,3 +189,4 @@ export const config: Config = {
         ]
     },]
 };
+console.log(config);

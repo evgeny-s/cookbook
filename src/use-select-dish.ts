@@ -1,15 +1,17 @@
 import {useEffect, useState} from "react";
-import {Dish, Ingredient} from "./config";
+import {config, Dish, Ingredient} from "./config";
 
 interface UseSelectDishInterface {
     ingredients: Ingredient[];
-    selectedDishes: boolean[];
-    onDishToggle: (index: number) => void
+    selectedDishes: string[];
+    onDishToggle: (index: string) => void,
+    dishes: Dish[],
 }
 
-export const useSelectDish = (allDishes: Dish[]): UseSelectDishInterface => {
+export const useSelectDish = (): UseSelectDishInterface => {
         const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-        const [selectedDishes, setSelectedDishes] = useState<boolean[]>([]);
+        const [selectedDishes, setSelectedDishes] = useState<string[]>([]);
+        const [dishes, setDishes] = useState<Dish[]>([]);
 
         const separator = '|&|';
 
@@ -47,8 +49,8 @@ export const useSelectDish = (allDishes: Dish[]): UseSelectDishInterface => {
 
         const aggregateIngredients = () => {
             let ingredients: Ingredient[] = [];
-            allDishes.filter((dish, index) => {
-                return selectedDishes[index] === true;
+            dishes.filter((dish, index) => {
+                return selectedDishes.includes(dishes[index].id);
             }).forEach((dish) => {
                 ingredients = [...ingredients, ...dish.ingredients]
             });
@@ -61,25 +63,24 @@ export const useSelectDish = (allDishes: Dish[]): UseSelectDishInterface => {
         }, [selectedDishes]);
 
         useEffect(() => {
-            if (allDishes && allDishes.length) {
-                const newSelectedDishes: boolean[] = [];
-                allDishes.forEach((dish) => {
-                    newSelectedDishes.push(false)
-                })
-                setSelectedDishes(newSelectedDishes);
+            setDishes(config.dishes)
+        }, []);
 
+        const onDishToggle = (id: string) => {
+            let currentSelectedDishes = [...selectedDishes];
+
+            if (currentSelectedDishes.includes(id)) {
+                const itemIndex = currentSelectedDishes.indexOf(id);
+                currentSelectedDishes.splice(itemIndex, 1);
+            } else {
+                currentSelectedDishes.push(id);
             }
-        }, [allDishes]);
-
-        const onDishToggle = (index: number) => {
-            const currentSelectedDishes = [...selectedDishes];
-            currentSelectedDishes[index] = !selectedDishes[index];
 
             setSelectedDishes(currentSelectedDishes);
         };
 
         return {
-            ingredients, selectedDishes, onDishToggle
+            ingredients, selectedDishes, onDishToggle, dishes
         };
     }
 ;
