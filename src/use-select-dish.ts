@@ -6,12 +6,15 @@ interface UseSelectDishInterface {
     selectedDishes: string[];
     onDishToggle: (index: string) => void,
     dishes: Dish[],
+    searchString: string;
+    onSearchChange: (value: string) => void;
 }
 
 export const useSelectDish = (): UseSelectDishInterface => {
         const [ingredients, setIngredients] = useState<Ingredient[]>([]);
         const [selectedDishes, setSelectedDishes] = useState<string[]>([]);
         const [dishes, setDishes] = useState<Dish[]>([]);
+        const [searchString, setSearchString] = useState<string>('');
 
         const separator = '|&|';
 
@@ -66,6 +69,15 @@ export const useSelectDish = (): UseSelectDishInterface => {
             setDishes(config.dishes)
         }, []);
 
+        useEffect(() => {
+            if (!searchString) {
+                return setDishes(config.dishes)
+            }
+
+            const currentDishes = [...dishes];
+            setDishes(currentDishes.filter((dish) => dish.title.toLowerCase().includes(searchString.toLowerCase())));
+        }, [searchString])
+
         const onDishToggle = (id: string) => {
             let currentSelectedDishes = [...selectedDishes];
 
@@ -79,8 +91,12 @@ export const useSelectDish = (): UseSelectDishInterface => {
             setSelectedDishes(currentSelectedDishes);
         };
 
+        const onSearchChange = (value: string) => {
+            setSearchString(value);
+        }
+
         return {
-            ingredients, selectedDishes, onDishToggle, dishes
+            ingredients, selectedDishes, onDishToggle, dishes, searchString, onSearchChange
         };
     }
 ;
