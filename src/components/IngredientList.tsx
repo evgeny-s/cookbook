@@ -104,7 +104,6 @@ export const IngredientList = ({ingredients}: IngredientListProps) => {
 
             {isListVisible && (
                 <Card style={{
-                    backgroundColor: "white",
                     position: "fixed",
                     bottom: "80px",
                     width: '100%',
