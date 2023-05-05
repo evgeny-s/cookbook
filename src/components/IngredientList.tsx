@@ -1,4 +1,4 @@
-import {Box, Card, CardContent, Fab, IconButton, Paper, TextField, Typography} from "@mui/material";
+import {Box, Card, CardContent, Checkbox, Fab, IconButton, Typography} from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Zoom from "@mui/material/Zoom";
 import * as React from "react";
@@ -16,6 +16,7 @@ export const IngredientList = ({ingredients}: IngredientListProps) => {
     const [isListVisible, setIsListVisible] = useState<boolean>(false);
     const [isButtonVisible, setIsButtonVisible] = useState<boolean>(false);
     const [isCopyConfirmVisible, setIsCopyConfirmVisible] = useState<boolean>(false);
+    const [excludedItems, setExcludedItems] = useState<number[]>([]);
 
     useEffect(() => {
         if (ingredients.length === 0) {
@@ -33,20 +34,53 @@ export const IngredientList = ({ingredients}: IngredientListProps) => {
         setIsListVisible(!isListVisible);
     };
 
-    const formatIngredients = () => {
-        return ingredients.map(({
-                                    title,
-                                    unit,
-                                    amount
-                                }: Ingredient) => `${title} - ${amount}${unit}`).join('\n');
+    const handleSelectIngredient = (index: number) => {
+        const copy = [...excludedItems];
+        if (!copy.includes(index)) {
+            copy.push(index);
+        } else {
+            const itemIndex = copy.indexOf(index);
+            copy.splice(itemIndex, 1);
+        }
+
+        setExcludedItems(copy);
+    };
+
+    const getSelectedIngredients = () => {
+        return ingredients
+            .filter((item, index) => !excludedItems
+                .includes(index))
+            .map(({
+                      title,
+                      unit,
+                      amount
+                  }: Ingredient) => `${title} - ${amount}${unit}`).join('\n');
     };
 
     const handleCopyClick = () => {
-        copy(formatIngredients());
+        copy(getSelectedIngredients());
         setIsCopyConfirmVisible(true);
         setTimeout(() => {
             setIsCopyConfirmVisible(false);
         }, 500);
+    };
+
+    const renderIngredients = () => {
+        return (
+            <Box>
+                {
+                    ingredients.map(({
+                                         title,
+                                         unit,
+                                         amount
+                                     }: Ingredient, index) => <Box display="flex" flexDirection="row"
+                                                                   alignItems="center" key={index}>
+                        <Checkbox onChange={handleSelectIngredient.bind(null, index)}
+                                  checked={!excludedItems.includes(index)}/>
+                        <Typography>{title} - {amount} {unit}</Typography></Box>)
+                }
+            </Box>
+        );
     };
 
     return (
@@ -82,17 +116,11 @@ export const IngredientList = ({ingredients}: IngredientListProps) => {
                 }}>
                     <CardContent>
                         <Typography variant="h6">Ingredients:</Typography>
-                        <TextField
-                            hidden={isListVisible}
-                            style={{width: '100%'}}
-                            placeholder="Ingredients"
-                            multiline
-                            variant="standard"
-                            value={formatIngredients()}
-                        />
+                        {renderIngredients()}
                         <Box textAlign="right">
                             {
-                                isCopyConfirmVisible && <IconButton><DoneIcon color={'success' as 'success'}/></IconButton>
+                                isCopyConfirmVisible &&
+                                <IconButton><DoneIcon color={'success' as 'success'}/></IconButton>
                             }
                             {
                                 !isCopyConfirmVisible && (
