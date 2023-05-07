@@ -14,6 +14,7 @@ export const useSelectDish = (): UseSelectDishInterface => {
         const [ingredients, setIngredients] = useState<Ingredient[]>([]);
         const [selectedDishes, setSelectedDishes] = useState<string[]>([]);
         const [dishes, setDishes] = useState<Dish[]>([]);
+        const [allDishes, setAllDishes] = useState<Dish[]>([]);
         const [searchString, setSearchString] = useState<string>('');
 
         const separator = '|&|';
@@ -52,8 +53,8 @@ export const useSelectDish = (): UseSelectDishInterface => {
 
         const aggregateIngredients = () => {
             let ingredients: Ingredient[] = [];
-            dishes.filter((dish, index) => {
-                return selectedDishes.includes(dishes[index].id);
+            allDishes.filter((dish, index) => {
+                return selectedDishes.includes(allDishes[index].id);
             }).forEach((dish) => {
                 ingredients = [...ingredients, ...dish.ingredients]
             });
@@ -66,7 +67,8 @@ export const useSelectDish = (): UseSelectDishInterface => {
         }, [selectedDishes]);
 
         useEffect(() => {
-            setDishes(config.dishes)
+            setDishes(config.dishes);
+            setAllDishes(config.dishes);
         }, []);
 
         useEffect(() => {
