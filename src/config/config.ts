@@ -53,7 +53,7 @@ export const config: Config = {
         picture: 'https://static.1000.menu/img/content-v2/78/2a/18882/legkii-gribnoi-sup-s-vermishelu_1603697003_15_max.jpg',
         ingredients: [
             {title: 'Шампиньоны', amount: 300, unit: 'гр'},
-            {title: 'Лампа', amount: 1, unit: 'упак'},
+            {title: 'Лапша', amount: 1, unit: 'упак'},
             {title: 'Окорочка куриные или индейка', amount: 1, unit: 'упак'},
             {title: 'Морковь', amount: 4, unit: 'шт'},
             {title: 'Лук', amount: 4, unit: 'шт'},
