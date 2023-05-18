@@ -1,5 +1,5 @@
 import {Box, IconButton, InputBase, Paper} from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
 import {ChangeEvent, useCallback} from "react";
 
 interface SearchFieldProps {
@@ -11,6 +11,10 @@ export const SearchField = ({searchString, onChange}: SearchFieldProps) => {
     const handleOnChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         onChange(event.target.value);
     }, [searchString]);
+
+    const onClear = () => {
+        onChange('');
+    };
 
     return (
         <Box display="flex" justifyContent="center">
@@ -25,9 +29,14 @@ export const SearchField = ({searchString, onChange}: SearchFieldProps) => {
                     value={searchString}
                     onChange={handleOnChange}
                 />
-                <IconButton type="button" sx={{p: '10px'}} aria-label="search">
-                    <SearchIcon/>
-                </IconButton>
+                {
+                    searchString ? (
+                        <IconButton type="button" sx={{p: '10px'}} aria-label="search" onClick={onClear}>
+                            <CloseIcon/>
+                        </IconButton>
+                    ) : null
+                }
+
             </Paper>
         </Box>
     );
